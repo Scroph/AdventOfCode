@@ -1,4 +1,5 @@
 import std.stdio;
+import std.datetime : StopWatch;
 import std.algorithm;
 
 int main(string[] args)
@@ -15,6 +16,10 @@ int main(string[] args)
 	ulong max_score = 0UL;
 	int[] teaspoons = new int[ingredients.length];
 	long from_100 = 0;
+	StopWatch sw;
+	sw.start();
+	scope(exit)
+		sw.stop();
 	while(true)
 	{
 		from_base(from_100++, 101, teaspoons);
@@ -27,6 +32,7 @@ int main(string[] args)
 				max_score = score;
 		}
 	}
+	writeln("Total time elapsed : ", sw.peek().seconds, " seconds");
 	writeln(max_score);
 
 	return 0;
